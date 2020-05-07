@@ -1,6 +1,7 @@
-EggTimer - Final Code 
+EggTimer App
 ============================================================================
 
+This is a demo eductional project
 
 Introduction
 ------------
