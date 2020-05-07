@@ -31,7 +31,7 @@ private val NOTIFICATION_ID = 0
 private val REQUEST_CODE = 0
 private val FLAGS = 0
 
-// TODO: Step 1.1 extension function to send messages (GIVEN)
+// extension function to send messages
 /**
  * Builds and delivers the notification.
  *
@@ -50,10 +50,20 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     // TODO: Step 1.2 get an instance of NotificationCompat.Builder
     // Build the notification
+    // need to use NotificationCompat.Builder instead NotificationBuilder to support older Android versions
+    // pass in context and channel id
+    // all notifications need to be assigned to a channel
+    val builder = NotificationCompat.Builder(
+        applicationContext,
+        applicationContext.getString(R.string.egg_notification_channel_id)
+    )
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel
 
-    // TODO: Step 1.3 set title, text and icon to builder
+    //set title, text and icon to builder
+        .setSmallIcon(R.drawable.cooked_egg)
+        .setContentTitle(applicationContext.getString(R.string.notification_title))
+        .setContentText(messageBody)
 
     // TODO: Step 1.13 set content intent
 
@@ -63,7 +73,10 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
         // TODO: Step 2.5 set priority
 
-    // TODO: Step 1.4 call notify
+    // call notify
+    // NOTIFICATION_ID represents the current notification instance
+    // since we always have only one notification at a time, we can use the same for all notifications
+    notify(NOTIFICATION_ID,builder.build())
 
 }
 
