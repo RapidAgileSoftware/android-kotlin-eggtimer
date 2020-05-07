@@ -40,15 +40,21 @@ private val FLAGS = 0
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
     // Create the content intent for the notification, which launches
     // this activity
-    // TODO: Step 1.11 create intent
+    val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
-    // TODO: Step 1.12 create PendingIntent
-
+    // create PendingIntent
+    // PendingIntent.FLAG_UPDATE_CURRENT uses/updates the current intent instead of creating a new one
+    val pendingContentfIntent = PendingIntent.getActivity(
+        applicationContext,
+        NOTIFICATION_ID,
+        contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
     // TODO: Step 2.0 add style
 
     // TODO: Step 2.2 add snooze action
 
-    // TODO: Step 1.2 get an instance of NotificationCompat.Builder
+
     // Build the notification
     // need to use NotificationCompat.Builder instead NotificationBuilder to support older Android versions
     // pass in context and channel id
@@ -57,16 +63,14 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         applicationContext,
         applicationContext.getString(R.string.egg_notification_channel_id)
     )
-
-    // TODO: Step 1.8 use the new 'breakfast' notification channel
-
     //set title, text and icon to builder
         .setSmallIcon(R.drawable.cooked_egg)
         .setContentTitle(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
-
-    // TODO: Step 1.13 set content intent
-
+    // set content intent
+        .setContentIntent(pendingContentfIntent)
+    // cancel notification when user taps on it
+        .setAutoCancel(true)
         // TODO: Step 2.1 add style to builder
 
         // TODO: Step 2.3 add snooze action
