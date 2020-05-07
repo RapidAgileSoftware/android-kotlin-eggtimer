@@ -24,3 +24,4 @@ start/.gradle/vcs-1/gc.properties
 .gradle/
 android-kotlin-notifications.iml
 local.properties
+app/app.iml
