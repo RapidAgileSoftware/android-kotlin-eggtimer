@@ -28,7 +28,9 @@ import com.example.android.eggtimernotifications.receiver.SnoozeReceiver
 
 // Notification ID.
 private val NOTIFICATION_ID = 0
+// needed to access the pending Intent if we want to update/cancel it
 private val REQUEST_CODE = 0
+// "one shot" Intent can be only used once ... it disappears when snoozing
 private val FLAGS = 0
 
 // extension function to send messages
@@ -41,7 +43,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // Create the content intent for the notification, which launches
     // this activity
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
-
     // create PendingIntent
     // PendingIntent.FLAG_UPDATE_CURRENT uses/updates the current intent instead of creating a new one
     val pendingContentfIntent = PendingIntent.getActivity(
@@ -61,7 +62,14 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // large Icon goes away when the notification is expanded
         .bigLargeIcon(null)
 
-    // TODO: Step 2.2 add snooze action
+    // add snooze Intent
+    val snoozeIntent = Intent(applicationContext,SnoozeReceiver::class.java)
+    val snoozePendingIntent = PendingIntent.getBroadcast(
+        applicationContext,
+        REQUEST_CODE,
+        snoozeIntent,
+        FLAGS
+    )
 
     // Build the notification
     // need to use NotificationCompat.Builder instead NotificationBuilder to support older Android versions
@@ -83,7 +91,12 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setStyle(bigPictureStyle)
         //set image as largeIcon, so it will be displayes as smaller item when the notification is collapsed
        .setLargeIcon(eggImage)
-        // TODO: Step 2.3 add snooze action
+        // add snooze action
+        .addAction(
+            R.drawable.egg_icon,
+            applicationContext.getString(R.string.snooze),
+            snoozePendingIntent
+        )
 
         // TODO: Step 2.5 set priority
 
