@@ -50,10 +50,18 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         contentIntent,
         PendingIntent.FLAG_UPDATE_CURRENT
     )
-    // TODO: Step 2.0 add style
+    // specify image
+    val eggImage = BitmapFactory.decodeResource(
+        applicationContext.resources,
+        R.drawable.cooked_egg
+    )
+    // create big picture style for notification
+    val bigPictureStyle = NotificationCompat.BigPictureStyle()
+        .bigPicture(eggImage)
+        // large Icon goes away when the notification is expanded
+        .bigLargeIcon(null)
 
     // TODO: Step 2.2 add snooze action
-
 
     // Build the notification
     // need to use NotificationCompat.Builder instead NotificationBuilder to support older Android versions
@@ -71,8 +79,10 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setContentIntent(pendingContentfIntent)
     // cancel notification when user taps on it
         .setAutoCancel(true)
-        // TODO: Step 2.1 add style to builder
-
+        // add big picture style
+        .setStyle(bigPictureStyle)
+        //set image as largeIcon, so it will be displayes as smaller item when the notification is collapsed
+       .setLargeIcon(eggImage)
         // TODO: Step 2.3 add snooze action
 
         // TODO: Step 2.5 set priority
