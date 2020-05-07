@@ -28,8 +28,8 @@ import com.example.android.eggtimernotifications.util.sendNotification
 class AlarmReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        // we don't want the toast message anymore
-        //Toast.makeText(context, context.getText(R.string.eggs_ready), Toast.LENGTH_SHORT).show()
+        // show Toast message if we are in the app
+        Toast.makeText(context, context.getText(R.string.eggs_ready), Toast.LENGTH_SHORT).show()
 
         //get instance of notificationManager
         val notificationManager = ContextCompat.getSystemService(context,NotificationManager::class.java) as NotificationManager
