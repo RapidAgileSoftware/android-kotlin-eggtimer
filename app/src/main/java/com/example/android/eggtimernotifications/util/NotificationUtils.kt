@@ -97,8 +97,8 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
             applicationContext.getString(R.string.snooze),
             snoozePendingIntent
         )
-
-        // TODO: Step 2.5 set priority
+        // set importance manually to support lower api levels, note: use setPriority and NotificationCompat
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     // call notify
     // NOTIFICATION_ID represents the current notification instance

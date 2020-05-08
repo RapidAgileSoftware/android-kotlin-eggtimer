@@ -29,7 +29,8 @@ class AlarmReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         // show Toast message if we are in the app
-        Toast.makeText(context, context.getText(R.string.eggs_ready), Toast.LENGTH_SHORT).show()
+        // on IMPORTANCE_HIGH we wont need Toast anymore
+        //Toast.makeText(context, context.getText(R.string.eggs_ready), Toast.LENGTH_SHORT).show()
 
         //get instance of notificationManager
         val notificationManager = ContextCompat.getSystemService(context,NotificationManager::class.java) as NotificationManager
