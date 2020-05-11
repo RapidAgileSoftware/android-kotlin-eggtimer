@@ -1,7 +1,7 @@
 EggTimer App
 ============================================================================
 
-This is a demo eductional project
+This is a demo eductional project based on codelabs android-kotlin-notifications
 
 Introduction
 ------------
@@ -9,9 +9,12 @@ Introduction
 EggTimer is a timer app for cooking eggs.
 You can start and stop the timer, choose different cooking intervals.. 
 
-In this codelab, working from this starter app, you:
+In this app uses firebase push notifications
 
-* Add notitications to the eggtimer app.
-* Use channels and importance for the app notifications. 
-* Customize and style the notifications.
+How to use it
+-------------
 
+- clone this repo
+- open in Android Studio
+- deploy to emulator or your real device
+- enjoy
